@@ -3,10 +3,10 @@ import carrito from '../assets/logo.jpg'
 
 const CartWidget = ()=>{
     return (
-        <div>
+        <div className='item-menu' >
             <a href="#">
 
-            <img className='carrito' src={carrito} alt="" />
+            <img  src="/public/react.svg" alt="" />
             </a>
         </div>
         

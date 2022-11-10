@@ -1,19 +1,22 @@
 
 
-.lista-menu {
-  list-style: none;
-}
+
+
 #root {
   
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column; 
+  height: 100vh;
+  background-color: rgb(247, 243, 243);
 }
 
 
 .carrito{
   padding: 10px;
-  height: 30px;
+  height: 40px;
 
 }
+

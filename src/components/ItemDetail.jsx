@@ -1,43 +1,37 @@
-
-import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { Link, useParams } from "react-router-dom"
 import { gFetch } from '../utils/gFetch'
-import './ItemListContainer.css'
 
+const ItemDetail = () => {
 
-const ItemListContainer = () => {  
     const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
-    const {categoriaId} = useParams()
-    
+    const {productId} =useParams()
+
     useEffect(()=> {
-        if (categoriaId) {
+        if (productId) {
             gFetch()
-            .then(resp =>  setProducts(resp.filter(prod => prod.categoria === categoriaId)))    
+            .then(resp =>  setProducts(resp.filter(prod => prod.id === productId)))    
             .catch(err => console.log(err))
-            .finally(()=>setLoading(false)) 
+            
             
         }else{
             gFetch()
             .then(resp =>  setProducts(resp))    
             .catch(err => console.log(err))
-            .finally(()=>setLoading(false)) 
+            
         }
         
         
-    }, [categoriaId])
+    }, [productId])
 
     
-    console.log(categoriaId)
+    console.log(productId)
 
     // [1,2,3] => [<li>1</li>, <li>2</li>,<li>3</li>]
 
     return (
 
-        loading 
-            ? 
-                <h2>Cargando...</h2>            
-            :
+        
             <div >
                 <h1>Paletas de Padel</h1>  
                     {/* <button onClick={cambiarEstado}>cambiar estado</button>    */}
@@ -69,6 +63,6 @@ const ItemListContainer = () => {
     
     )
 }
-// los eventos me disparan una nueva ejecución del componente donde se esta ejecutando 
 
-export default ItemListContainer
+
+export default ItemDetail
