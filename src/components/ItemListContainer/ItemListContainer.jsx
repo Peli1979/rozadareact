@@ -1,8 +1,10 @@
 
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { gFetch } from '../utils/gFetch'
+import { gFetch } from '../../utils/gFetch'
 import './ItemListContainer.css'
+
+
 
 
 const ItemListContainer = () => {  
@@ -39,13 +41,14 @@ const ItemListContainer = () => {
                 <h2>Cargando...</h2>            
             :
             <div >
-                <h1>Paletas de Padel</h1>  
+                <h1 className='bien' >Bienvenidos a Full Padel Shop!!</h1>  
+                
                     {/* <button onClick={cambiarEstado}>cambiar estado</button>    */}
                     
-                    <div className='cards container ml-2' >
+                    <div className='cards container ml-5' >
                        
 
-                    { products.map( obj =>  <div key={obj.id} className= 'card w-25 p-3'>
+                    { products.map( obj =>  <div key={obj.id} className= 'card w-25 p-3 m-5 me-3 mb-1'>
                                             <Link to={`/detail/${obj.id}`} >
                                                 <div className='card-header'>
                                                     {obj.name}
@@ -57,9 +60,13 @@ const ItemListContainer = () => {
                                                     </center>
                                                 </div>
                                                 <div className='card-footer w-100'>
-                                                    precio : {obj.price}
+                                                    precio : $ {obj.price}
+                                                    <br></br>
+                                                    stock: {obj.stock}
                                                 </div>
+                                                
                                             </Link>
+                                           
                                             </div> )  }     
                         
                     

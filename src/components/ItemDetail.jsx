@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from "react-router-dom"
 import { gFetch } from '../utils/gFetch'
+import Contador from './Contador/Contador'
 
 const ItemDetail = () => {
 
@@ -33,9 +34,12 @@ const ItemDetail = () => {
 
         
             <div >
-                <h1>Paletas de Padel</h1>  
+                <h1>Detalles del Producto</h1>  
                     {/* <button onClick={cambiarEstado}>cambiar estado</button>    */}
-                    
+                    <div className='contador' >
+                    <h3>Contador</h3>
+                    <Contador/>
+                    </div>
                     <div className='cards container ml-2' >
                        
 
@@ -52,11 +56,13 @@ const ItemDetail = () => {
                                                 </div>
                                                 <div className='card-footer w-100'>
                                                     precio : {obj.price}
+                                                    <br></br>
+                                                    stock: {obj.stock}
                                                 </div>
                                             </Link>
                                             </div> )  }     
                         
-                    
+
                     </div>
                 </div>
                     

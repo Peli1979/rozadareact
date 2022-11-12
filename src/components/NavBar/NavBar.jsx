@@ -14,12 +14,14 @@ const NavBar = () => {
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
+        
         <Link to="/">FullPadelShop</Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-          <Link to="/categoria/padel">Padel</Link>
-          <Link to="/categoria/tenis">Tenis</Link>
+          <Link className="padel" to="/categoria/padel">Padel</Link>
+          <Link className="tenis" to="/categoria/tenis">Tenis</Link>
+          <Link className="tenis" to="/categoria/Accesorios">Accesorios</Link>
           </Nav>
           <Nav>
             <Nav.Link href="#deets">Carrito</Nav.Link>
