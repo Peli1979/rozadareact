@@ -1,0 +1,12 @@
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: space-around;
+    
+}
+
+.bien{
+    margin-left: 300px
+;
+    
+}
