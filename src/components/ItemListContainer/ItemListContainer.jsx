@@ -10,7 +10,7 @@ import ItemList from '../ItemList/ItemList'
 
 
 
-const ItemListContainer = () => {  
+const ItemListContainer = (obj) => {  
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
     const {categoriaId} = useParams()

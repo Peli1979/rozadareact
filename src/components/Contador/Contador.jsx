@@ -1,25 +1,48 @@
 import {  useState } from 'react'
+import Intercambiabilidad from '../BotonesContador/Intercambiabilidad'
 import './Contador.css'
+import { InputCount } from '../BotonesContador/AgregarCarrito'
 
-const Contador = () => {
-    const [valor, setValor] = useState(0)
-    
+const Contador = ({initial=1, stock=100, onAdd}) => {
+    const [valor, setValor] = useState(initial)
+    const [inputType, setInputType ] = useState('button')
+
+   
+   
 
     const sumar = () =>{
+      if(valor<stock){
+
         setValor(valor+1)
+      }
     }
     
     const restar= () =>{
-        setValor(valor-1)
+      if (valor>1)
+       { 
+        setValor(valor-1)}
     }
+    const agregarCantidad = () =>{
+      onAdd(valor)
+      setInputType('input')
+  }
+
   return (
     <div>
         
-        <button onClick={sumar} >+</button>
-        {valor}
         <button onClick={restar} >-</button>
+        {valor}
+        <button onClick={sumar} >+</button>
         <br></br>
-        <button className='btn' >Agregar al Carrito</button>
+        {
+                inputType === 'button' ? 
+                <button className='btn btn-outline-primary' onClick={agregarCantidad} >Agregar al carrito</button>
+                    
+                : 
+                    <InputCount />
+            } 
+
+        
     </div>
   )
 }

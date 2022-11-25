@@ -1,12 +1,23 @@
+
 import { useEffect, useState } from 'react'
 import { Link, useParams } from "react-router-dom"
+import {  useCartContext } from '../Context/cartContext'
 import { gFetch } from '../utils/gFetch'
 import Contador from './Contador/Contador'
+import ItemList from './ItemList/ItemList'
 
 const ItemDetail = () => {
 
     const [products, setProducts] = useState([])
     const {productId} =useParams()
+    const {cartList, agregarAlCarrito} = useCartContext()
+    
+
+    const onAdd = (valor) =>{
+        console.log(valor)
+        agregarAlCarrito({...products, valor})
+    }
+    console.log(cartList)
 
     useEffect(()=> {
         if (productId) {
@@ -26,7 +37,7 @@ const ItemDetail = () => {
     }, [productId])
 
     
-    console.log(productId)
+    
 
     // [1,2,3] => [<li>1</li>, <li>2</li>,<li>3</li>]
 
@@ -38,29 +49,12 @@ const ItemDetail = () => {
                     {/* <button onClick={cambiarEstado}>cambiar estado</button>    */}
                     <div className='contador' >
                     <h3>Contador</h3>
-                    <Contador/>
+                    <Contador stock={10} initial={1} onAdd={onAdd} />
                     </div>
                     <div className='cards container ml-2' >
                        
 
-                    { products.map( obj =>  <div key={obj.id} className= 'card w-25 p-3'>
-                                            <Link to={`/detail/${obj.id}`} >
-                                                <div className='card-header'>
-                                                    {obj.name}
-                                                </div>
-                                                <div className='card-body'>
-                                                    <center>
-                                                        <img src={obj.foto} className="w-50" />
-                        
-                                                    </center>
-                                                </div>
-                                                <div className='card-footer w-100'>
-                                                    precio : {obj.price}
-                                                    <br></br>
-                                                    stock: {obj.stock}
-                                                </div>
-                                            </Link>
-                                            </div> )  }     
+                    <ItemList products={products}/>     
                         
 
                     </div>
