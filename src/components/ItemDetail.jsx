@@ -10,7 +10,9 @@ import ItemList from './ItemList/ItemList'
 const ItemDetail = () => {
 
     const [products, setProducts] = useState([])
-    const [product, setProduct] = useState({})
+    const [item, setItem] = useState([]);
+   
+    
     const [loading, setLoading] = useState(true)
     const [isCounter, setIsCounter ] = useState(true)
     const {productId} =useParams()
@@ -23,6 +25,9 @@ const ItemDetail = () => {
         setIsCounter(false)
     }
     console.log(cartList)
+
+    
+   
 
     /*useEffect(()=> {
         if (productId) {
@@ -40,14 +45,7 @@ const ItemDetail = () => {
         
         
     }, [productId])*/
-    useEffect (()=> {
-        const dbFirestore = getFirestore()
-        const queryCollection = collection(dbFirestore, 'Productos', 'CdDaOd9EHcR0mXX0dGSe')
-        getDoc(queryCollection)
-        .then((doc)=>setProduct({id: doc.id, ...doc.data()}))
-    },[])
-
-    console.log(product)
+    
     
 
     // [1,2,3] => [<li>1</li>, <li>2</li>,<li>3</li>]

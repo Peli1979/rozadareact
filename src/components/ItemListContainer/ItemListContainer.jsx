@@ -23,12 +23,20 @@ const ItemListContainer = (obj) => {
         getDoc(queryCollection)
         .then((doc)=>setProduct({id: doc.id, ...doc.data()}))
     },[])*/
+    /*useEffect (()=> {
+        const dbFirestore = getFirestore()
+        const queryCollection = collection(dbFirestore, 'Productos', 'id')
+        getDoc(queryCollection)
+        .then((doc)=>setProduct({id: doc.id, ...doc.data()}))
+    },[])
 
-    useEffect (()=> {
+    console.log(product)*/
+
+    /*useEffect (()=> {
         const dbFirestore = getFirestore()
         const queryCollection = collection(dbFirestore, 'Productos')
       if(categoriaId)  {
-          /*const queryCollection =collection(dbFirestore, 'Productos')*/
+          /*const queryCollection =collection(dbFirestore, 'Productos')
           let queryFilter = query(queryCollection, where('categoria', '==', 'categoriaId'))
           getDocs(queryFilter)
           .then((resp)=> setProducts(resp.docs.map(doc=>({id: doc.id, ...doc.data()}))))
@@ -43,7 +51,42 @@ const ItemListContainer = (obj) => {
             .then((doc)=>setProduct({id: doc.id, ...doc.data()}))
         }
         
-    }, [categoriaId] )
+    }, [categoriaId] )*/
+    useEffect(() => {
+        const dbFirestore = getFirestore()
+// creamos una función que va a obtener los datos de firebase
+        const getData = async () => {
+// con una condicional, si no tiene categorías, 
+            const queryRef = !categoriaId
+// va a traer todos los productos
+                ? collection(dbFirestore, "Productos")
+// si tiene categorías, firevase va a filtrarlas
+                : query(
+                    collection(dbFirestore, "Productos"),
+                    where("categoria", "==", categoriaId)
+                );
+// recibimos los datos
+            const response = await getDocs(queryRef);
+// y hacemos un map para crear objetos con esos datos.
+            const productos = response.docs.map((doc) => {
+                const newProduct = {
+                    ...doc.data(),
+                    id: doc.id,
+                };
+// lo retornamos
+                return newProduct;
+            });
+            setTimeout(() => {
+// simulamos una demora de 2' y actualizamos los 2 estados.
+                setProducts(productos);
+                setLoading(false)
+            }, 2000)
+
+        };
+// llamamos a la función
+        getData();
+
+    }, [categoriaId])
     
   /* useEffect(()=> {
         if (categoriaId) {
