@@ -7,10 +7,10 @@ import { gFetch } from '../utils/gFetch'
 import Contador from './Contador/Contador'
 import ItemList from './ItemList/ItemList'
 
-const ItemDetail = () => {
+const ItemDetail = ({item}) => {
 
     const [products, setProducts] = useState([])
-    const [item, setItem] = useState([]);
+    
    
     
     const [loading, setLoading] = useState(true)
@@ -29,7 +29,7 @@ const ItemDetail = () => {
     
    
 
-    /*useEffect(()=> {
+   /*useEffect(()=> {
         if (productId) {
             gFetch()
             .then(resp =>  setProducts(resp.filter(prod => prod.id === productId)))    
@@ -44,11 +44,11 @@ const ItemDetail = () => {
         }
         
         
-    }, [productId])*/
+    }, [productId])
     
     
 
-    // [1,2,3] => [<li>1</li>, <li>2</li>,<li>3</li>]
+    // [1,2,3] => [<li>1</li>, <li>2</li>,<li>3</li>]*/
 
     return (
 
@@ -59,6 +59,7 @@ const ItemDetail = () => {
 
             <div >
                 <h1>Detalles del Producto</h1>  
+                    
                     {/* <button onClick={cambiarEstado}>cambiar estado</button>    */}
                     <div className='contador' >
                     { isCounter ? 

@@ -17,13 +17,13 @@ const ItemListContainer = (obj) => {
    
     const {categoriaId} = useParams()
 
-   /* useEffect (()=> {
+    /*useEffect (()=> {
         const dbFirestore = getFirestore()
         const queryCollection = collection(dbFirestore, 'Productos', '0BVmdXdcSa07U7vkPH9a')
         getDoc(queryCollection)
         .then((doc)=>setProduct({id: doc.id, ...doc.data()}))
-    },[])*/
-    /*useEffect (()=> {
+    },[])
+    useEffect (()=> {
         const dbFirestore = getFirestore()
         const queryCollection = collection(dbFirestore, 'Productos', 'id')
         getDoc(queryCollection)
@@ -32,11 +32,11 @@ const ItemListContainer = (obj) => {
 
     console.log(product)*/
 
-    /*useEffect (()=> {
+   /* useEffect (()=> {
         const dbFirestore = getFirestore()
         const queryCollection = collection(dbFirestore, 'Productos')
       if(categoriaId)  {
-          /*const queryCollection =collection(dbFirestore, 'Productos')
+          const queryCollection =collection(dbFirestore, 'Productos')
           let queryFilter = query(queryCollection, where('categoria', '==', 'categoriaId'))
           getDocs(queryFilter)
           .then((resp)=> setProducts(resp.docs.map(doc=>({id: doc.id, ...doc.data()}))))
@@ -88,7 +88,7 @@ const ItemListContainer = (obj) => {
 
     }, [categoriaId])
     
-  /* useEffect(()=> {
+  /*useEffect(()=> {
         if (categoriaId) {
             gFetch()
             .then(resp =>  setProducts(resp.filter(prod => prod.categoria === categoriaId)))    
@@ -103,9 +103,9 @@ const ItemListContainer = (obj) => {
         }
         
         
-    }, [categoriaId])*/
+    }, [categoriaId])
 
-    console.log(product)
+    console.log(product)*/
     
 
     // [1,2,3] => [<li>1</li>, <li>2</li>,<li>3</li>]

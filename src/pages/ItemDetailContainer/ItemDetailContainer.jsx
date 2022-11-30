@@ -1,9 +1,12 @@
 import ItemDetail from "../../components/ItemDetail"
 import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 const ItemDetailContainer = () => {
     const {productId} =useParams()
     const [item, setItem] = useState([]);
+    const [loading, setLoading] = useState(true)
     
     useEffect(() => {
     const getProducto = async () => {
@@ -20,9 +23,11 @@ const dbFirestore = getFirestore()
     };
     getProducto();
   }, [productId]);
+
   return (
     <div>
-        <ItemDetail />
+      
+        <ItemDetail item={item}/>
     </div>
   )
 }
