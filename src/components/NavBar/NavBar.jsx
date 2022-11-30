@@ -5,9 +5,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
+import { useCartContext } from "../../Context/cartContext";
 
 const NavBar = () => {
-
+  const {cantidadTotal} = useCartContext()
     //variable de estado
     return (
       
@@ -26,6 +27,7 @@ const NavBar = () => {
           <Nav>
             <Nav.Link href="#deets">Carrito</Nav.Link>
            <Link to='Cart'>
+              {cantidadTotal() !== 0 && cantidadTotal()}
               <CartWidget/>
            </Link>
             <Nav.Link eventKey={2} href="#memes">

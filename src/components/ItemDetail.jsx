@@ -1,4 +1,5 @@
 
+import { collection, getFirestore } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from "react-router-dom"
 import {  useCartContext } from '../Context/cartContext'
@@ -9,22 +10,26 @@ import ItemList from './ItemList/ItemList'
 const ItemDetail = () => {
 
     const [products, setProducts] = useState([])
+    const [product, setProduct] = useState({})
+    const [loading, setLoading] = useState(true)
+    const [isCounter, setIsCounter ] = useState(true)
     const {productId} =useParams()
     const {cartList, agregarAlCarrito} = useCartContext()
     
 
     const onAdd = (valor) =>{
         console.log(valor)
-        agregarAlCarrito({...products, valor})
+        agregarAlCarrito({...products[0], valor})
+        setIsCounter(false)
     }
     console.log(cartList)
 
-    useEffect(()=> {
+    /*useEffect(()=> {
         if (productId) {
             gFetch()
             .then(resp =>  setProducts(resp.filter(prod => prod.id === productId)))    
             .catch(err => console.log(err))
-            
+            .finally(()=>setLoading(false))
             
         }else{
             gFetch()
@@ -34,22 +39,43 @@ const ItemDetail = () => {
         }
         
         
-    }, [productId])
+    }, [productId])*/
+    useEffect (()=> {
+        const dbFirestore = getFirestore()
+        const queryCollection = collection(dbFirestore, 'Productos', 'CdDaOd9EHcR0mXX0dGSe')
+        getDoc(queryCollection)
+        .then((doc)=>setProduct({id: doc.id, ...doc.data()}))
+    },[])
 
-    
+    console.log(product)
     
 
     // [1,2,3] => [<li>1</li>, <li>2</li>,<li>3</li>]
 
     return (
 
-        
+        loading 
+            ?
+            <h2>Cargando...</h2>
+            :
+
             <div >
                 <h1>Detalles del Producto</h1>  
                     {/* <button onClick={cambiarEstado}>cambiar estado</button>    */}
                     <div className='contador' >
-                    <h3>Contador</h3>
+                    { isCounter ? 
+                    <>
+                    <h2>Contador</h2>
                     <Contador stock={10} initial={1} onAdd={onAdd} />
+                    
+                    </>
+                    :
+                    <div className="container mt-5">
+                    <Link to='/cart' className="btn btn-success">Terminar mi compra</Link>
+                    <Link to='/' className="btn btn-success">Seguir Comprando </Link>
+                    </div>
+                    
+                }
                     </div>
                     <div className='cards container ml-2' >
                        
