@@ -57,16 +57,10 @@ const ItemDetail = ({item}) => {
             :
 
             <div >
-                <h1>Detalles del Producto</h1>  
-                <img src={item.foto} className="w-25" />
-                <p>Categoría: {item.categoria}</p>
-                <p>Precio: {item.price}</p>
-                 <p>stock: {item.stock}</p>
-                
                     
-                    {/* <button onClick={cambiarEstado}>cambiar estado</button>    */}
+                <>
+                        <h1>Detalles del Producto</h1>  
                     <div className='contador' >
-                    
                     { isCounter ? 
                     <>
                     <h2>Contador</h2>
@@ -80,14 +74,16 @@ const ItemDetail = ({item}) => {
                     </div>
                     
                 }
-                    </div>
-                    <div className='cards container ml-2' >
-                       
-
-                      
-                        
-
-                    </div>
+                </div>
+                <img src={item.foto} className="w-25" />
+                <p>Producto: {item.name}</p>
+                <p>Categoría: {item.categoria}</p>
+                <p>Precio: {item.price}</p>
+                 <p>stock: {item.stock}</p>
+                </>
+                   
+                    
+                    
                 </div>
                     
     
