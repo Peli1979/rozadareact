@@ -1,7 +1,7 @@
 // simulación -> mock
 
 // fetch -> promise
-let obj = [
+/*let obj = [
     {id: '1', name: 'PRODUCTO 1', categoria: 'padel',stock: '100',price: '15000',  foto:'https://d3ugyf2ht6aenh.cloudfront.net/stores/069/005/products/paleta-padel-royal-madrid-11-2fc8f534bfbf9dc4e315816062178202-1024-1024.jpg'},
     {id: '2', name: 'PRODUCTO 2', categoria: 'padel',stock: '100',price: '25000',  foto:'https://www.hectortenis.com/wp-content/uploads/2021/04/diseno-sin-titulo1181-8dfef7870527fa919516097738068285-1024-1024.png'},
     {id: '3', name: 'PRODUCTO 3', categoria: 'padel',stock: '100',price: '22000',  foto:'https://sportotalar.vtexassets.com/arquivos/ids/305868-800-auto?v=637727683642230000&width=800&height=auto&aspect=true'},
@@ -29,5 +29,5 @@ export const gFetch = (id) => {
     })
     // .catch()
 }
-
+*/
     

@@ -3,7 +3,7 @@ import { collection, getFirestore } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from "react-router-dom"
 import {  useCartContext } from '../Context/cartContext'
-import { gFetch } from '../utils/gFetch'
+//import { gFetch } from '../utils/gFetch'
 import Contador from './Contador/Contador'
 import ItemList from './ItemList/ItemList'
 
@@ -20,8 +20,7 @@ const ItemDetail = ({item}) => {
     
 
     const onAdd = (valor) =>{
-        console.log(valor)
-        agregarAlCarrito({...items[0], valor})
+        agregarAlCarrito({...item, valor})
         setIsCounter(false)
     }
     console.log(cartList)

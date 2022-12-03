@@ -7,6 +7,8 @@ const ItemDetailContainer = () => {
     const {productId} =useParams()
     const [item, setItem] = useState([]);
     const [loading, setLoading] = useState(true)
+
+    
     
     useEffect(() => {
     const getProducto = async () => {
@@ -23,6 +25,8 @@ const dbFirestore = getFirestore()
     };
     getProducto();
   }, [productId]);
+
+  
 
   return (
     <div>

@@ -1,7 +1,7 @@
 
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { gFetch } from '../../utils/gFetch'
+//import { gFetch } from '../../utils/gFetch'
 import './ItemListContainer.css'
 import ItemList from '../ItemList/ItemList'
 
