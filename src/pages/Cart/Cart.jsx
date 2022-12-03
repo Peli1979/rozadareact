@@ -5,7 +5,7 @@ import { useCartContext } from "../../Context/cartContext"
 
 const Cart = () => {
 
-  const {cartList, borrarCarrito, precioTotal, eliminarItem } = useCartContext()
+  const {cartList, borrarCarrito, precioTotal, eliminarprod } = useCartContext()
 
   return (
     <div>
@@ -16,7 +16,7 @@ const Cart = () => {
           {cartList.map((prod) =>  <div key={prod.id}>
                                       <img src={prod.foto} className="w-25" />
                                         Nombre: {prod.name} - Precio {prod.price} - cantidad: {prod.valor}
-                                        <button onClick={()=> eliminarItem(prod.id)} >x</button>
+                                        <button onClick={()=> eliminarprod(prod.id)} >x</button>
                                       </div>
           )}
         </ul>
@@ -25,7 +25,7 @@ const Cart = () => {
         <label >{precioTotal()!== 0 && precioTotal()}</label>
         </>
           :
-        <h2>No hay productos en el Carrito <Link to="/" >Volver a Comprar</Link></h2>
+        <h2>No hay prodos en el Carrito <Link to="/" >Volver a Comprar</Link></h2>
           }
       
       </div>
