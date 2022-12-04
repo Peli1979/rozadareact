@@ -9,6 +9,7 @@ const Cart = () => {
     name: "",
     phone: "",
     email: "",
+    emailCheck:""
   });
 
   const {
@@ -17,6 +18,7 @@ const Cart = () => {
     totalPrice,
     showOrder,
     orderId,
+    order
   } = useCartContext();
 
   const createOrder = (evt) => {
@@ -29,7 +31,7 @@ const Cart = () => {
       name: product.name,
       price: product.price,
     }));
-
+  if (dataForm.email === dataForm.emailCheck) {
   const db = getFirestore();
   const queryCollection = collection(db, "orders");
     addDoc(queryCollection, orden)
@@ -41,18 +43,23 @@ const Cart = () => {
           email: "",
         });
         deleteCart();
-      });
+      });}else{
+        note()
+      }
   };
+  const note = () =>
+    alert("La direccion de email no es correcta");
+
 
   const handleOnChange = (evt) => {
     setDataForm({
       ...dataForm,
       [evt.target.name]: evt.target.value,
     });
-    console.log(dataForm);
   };
 
   return (
+    
     <div>
       <h1>Carrito</h1>
 
@@ -62,6 +69,7 @@ const Cart = () => {
 
           <form>
             <input
+              required
               type="text"
               name="name"
               onChange={handleOnChange}
@@ -69,20 +77,23 @@ const Cart = () => {
               placeholder="Ingrese nombre"
             />
             <input
-              type="text"
+              required
+              type="email"
               name="email"
               onChange={handleOnChange}
               value={dataForm.email}
               placeholder="Ingrese mail"
             />
             <input
-              type="text"
-              name="repetirEmail"
+              required
+              type="email"
+              name="emailCheck"
               onChange={handleOnChange}
               placeholder="Repetir mail"
             />
             <input
-              type="text"
+              required
+              type="number"
               name="phone"
               onChange={handleOnChange}
               value={dataForm.phone}
