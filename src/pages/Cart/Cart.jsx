@@ -61,7 +61,7 @@ const Cart = () => {
   return (
     
     <div>
-      <h1>Carrito</h1>
+      <h1>Carrito Ecommerce</h1>
 
       {cartList.length !== 0 ? (
         <>
