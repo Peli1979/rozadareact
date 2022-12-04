@@ -1,55 +1,38 @@
-import {  useState } from 'react'
+import { useState } from "react";
 
-import './Contador.css'
+import "./Contador.css";
 
+const Counter = ({ initial = 1, stock = 100, onAdd }) => {
+  const [quantity, setQuantity] = useState(initial);
 
-const Contador = ({initial=1, stock=100, onAdd}) => {
-    const [valor, setValor] = useState(initial)
-   
-
-   
-   
-
-    const sumar = () =>{
-      if(valor<stock){
-
-        setValor(valor+1)
-      }
+  const sumar = () => {
+    if (quantity < stock) {
+      setQuantity(quantity + 1);
     }
-    
-    const restar= () =>{
-      if (valor>1)
-       { 
-        setValor(valor-1)}
+  };
+
+  const restar = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
     }
-    const agregarCantidad = () =>{
-      onAdd(valor)
-      
-  }
+  };
+  const addQuantity = () => {
+    onAdd(quantity);
+  };
 
   return (
     <div>
-        
-        <button onClick={restar} >-</button>
-        {valor}
-        <button onClick={sumar} >+</button>
-        <br></br>
-        {
-                
-                <button className='btn btn-outline-primary' onClick={agregarCantidad} >Agregar al carrito</button>
-                    
-        }
-
-        
+      <button onClick={restar}>-</button>
+      {quantity}
+      <button onClick={sumar}>+</button>
+      <br></br>
+      {
+        <button className="btn btn-outline-primary" onClick={addQuantity}>
+          Agregar al carrito
+        </button>
+      }
     </div>
-  )
-}
+  );
+};
 
-export default Contador
-
-
-
-
- 
-
-
+export default Counter;

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Item = ({prod})=> {
+const Item = ({ prod }) => {
   return (
     <div className="card w-25 p-3 m-5 me-3 mb-1">
       <Link to={`/detail/${prod.id}`}>

@@ -1,16 +1,9 @@
-import { Link } from "react-router-dom"
-import Item from "../Item/Item"
-import './ItemList.css'
 
+import Item from "../Item/Item";
+import "./ItemList.css";
 
+const ItemList = ({ products }) => {
+  return products.map((prod) => <Item key={prod.id} prod={prod} />);
+};
 
-const ItemList = ({products}) => {
-  return (
-   
-   
-      products.map( prod => <Item key={prod.id} prod={prod} />  )
-     
-  )
-}
-
-export default ItemList
+export default ItemList;

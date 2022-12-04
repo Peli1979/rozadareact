@@ -1,16 +1,9 @@
+const CartWidget = () => {
+  return (
+    <div className="item-menu">
+      <img style={{ width: "50px" }} src="/public/cart-2.png" alt="" />
+    </div>
+  );
+};
 
-import carrito from '../assets/logo.jpg'
-
-const CartWidget = ()=>{
-    return (
-        <div className='item-menu' >
-            
-
-            <img style={{width:"50px"}} src="/public/cart-2.png" alt="" />
-            
-        </div>
-        
-    )
-}
-
-export default CartWidget
+export default CartWidget;

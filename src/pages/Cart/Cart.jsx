@@ -1,97 +1,115 @@
-
-import { addDoc, collection, getFirestore } from "firebase/firestore"
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import { useCartContext } from "../../Context/cartContext"
-
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useCartContext } from "../../Context/cartContext";
+import CartList from "./CartList";
 
 const Cart = () => {
   const [dataForm, setDataForm] = useState({
-    name:'',
-    phone:'',
-    email:''
+    name: "",
+    phone: "",
+    email: "",
+  });
 
-  })
+  const {
+    cartList,
+    deleteCart,
+    totalPrice,
+    showOrder,
+    orderId,
+  } = useCartContext();
 
-  const [idOrder, setIdOrder] = useState()
+  const createOrder = (evt) => {
+    evt.preventDefault();
+    let orden = {};
+    orden.buyer = dataForm;
+    orden.total = totalPrice();
+    orden.Productos = cartList.map((product) => ({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+    }));
 
-  
-  const {cartList, borrarCarrito, precioTotal, eliminarItem } = useCartContext()
-  
-  const generarOrden = (evt) =>{
-    evt.preventDefault()
-  let orden = {}
-  orden.buyer = dataForm
-  orden.total = precioTotal()
-  orden.Productos = cartList.map(product =>({
-    id:product.id, 
-    name:product.name, 
-    price:product.price
-  }))
-  
-  const db = getFirestore()
-  const queryCollection = collection(db, 'orders')
-  addDoc(queryCollection, orden)
-  .then(resp => console.log(resp.id))
-  .finally(() =>{
-    setDataForm({
-      name:'',
-      phone:'',
-      email:'',
-    })
-    borrarCarrito()
-    
-  })
+  const db = getFirestore();
+  const queryCollection = collection(db, "orders");
+    addDoc(queryCollection, orden)
+      .then((resp) => showOrder(resp.id))
+      .finally(() => {
+        setDataForm({
+          name: "",
+          phone: "",
+          email: "",
+        });
+        deleteCart();
+      });
+  };
 
-
-  
-  }
-
-  const handleOnChange = (evt) =>{
+  const handleOnChange = (evt) => {
     setDataForm({
       ...dataForm,
-      [evt.target.name]: evt.target.value
-    })
-    console.log(dataForm)
-  }
-  
+      [evt.target.name]: evt.target.value,
+    });
+    console.log(dataForm);
+  };
+
   return (
     <div>
       <h1>Carrito</h1>
 
-      { cartList.length !== 0 ? <> 
-        <ul>
-          {cartList.map((prod) =>  <div key={prod.id}>
-                                      <img src={prod.foto} className="w-25" />
-                                        Nombre: {prod.name} - Precio $ {prod.price} - cantidad: {prod.valor}
-                                        <button onClick={()=> eliminarItem(prod.id)} >x</button>
-                                      </div>
-          )}
-        </ul>
-        <button onClick={borrarCarrito}>Vaciar carrito</button>
+      {cartList.length !== 0 ? (
+        <>
+         <CartList/>
 
-        <form>
-          
-          <input type='text' name='name' onChange={handleOnChange} value={dataForm.name} placeholder="Ingrese nombre"/>
-          <input type='text' name='email' onChange={handleOnChange} value={dataForm.email} placeholder="Ingrese mail"/>
-          <input type='text' name='repetirEmail' onChange={handleOnChange} placeholder="Repetir mail"/>
-          <input type='text' name='phone' onChange={handleOnChange} value={dataForm.phone} placeholder="Ingrese telefono"/>
+          <form>
+            <input
+              type="text"
+              name="name"
+              onChange={handleOnChange}
+              value={dataForm.name}
+              placeholder="Ingrese nombre"
+            />
+            <input
+              type="text"
+              name="email"
+              onChange={handleOnChange}
+              value={dataForm.email}
+              placeholder="Ingrese mail"
+            />
+            <input
+              type="text"
+              name="repetirEmail"
+              onChange={handleOnChange}
+              placeholder="Repetir mail"
+            />
+            <input
+              type="text"
+              name="phone"
+              onChange={handleOnChange}
+              value={dataForm.phone}
+              placeholder="Ingrese telefono"
+            />
 
-          <button className="btn btn-outline-success" onClick={generarOrden}>Generar orden</button>
-        </form>
+            <button className="btn btn-outline-success" onClick={createOrder}>
+              Generar orden
+            </button>
+          </form>
 
-        <br></br>
-        <label >IMPORTE TOTAL A PAGAR ${precioTotal()!== 0 && precioTotal()}</label>
+          <br></br>
+          <label>
+            IMPORTE TOTAL A PAGAR ${totalPrice() !== 0 && totalPrice()}
+          </label>
         </>
-          :
-          <>
-        <h2>No hay productos en el Carrito <Link to="/" >Volver a Comprar</Link></h2>
-        <label></label>
-          </>
-          }
-      
-      </div>
-  )
-}
+      ) : (
+        <>
+          <h2>
+            No hay productos en el Carrito <Link to="/">Volver a Comprar</Link>
+            <br></br>
+          <label>N° de orden: {orderId}</label>
+          </h2>
+        </>
+      )}
+    </div>
+  );
+};
 
-export default Cart
+export default Cart;
