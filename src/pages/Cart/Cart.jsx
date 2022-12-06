@@ -115,7 +115,7 @@ const Cart = () => {
           <h2>
             No hay productos en el Carrito <Link to="/">Volver a Comprar</Link>
             <br></br>
-          <label>N° de orden: {orderId}</label>
+          {order && <label>N° de orden: {orderId}</label>}
           </h2>
         </>
       )}
